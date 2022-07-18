@@ -5,9 +5,40 @@ msg_2 = "Yes ... an interesting math operation. You've slept through all classes
 msg_3 = "Yeah... division by zero. Smart move..."
 msg_4 = "Do you want to store the result? (y / n):" 
 msg_5 = "Do you want to continue calculations? (y / n):"
+msg_6 = " ... lazy"
+msg_7 = " ... very lazy"
+msg_8 = " ... very, very lazy"
+msg_9 = "You are"
 
 # memory variable
 memory = 0
+
+# defining useful fuctions
+
+# function for checking a integer is single digit or not
+def is_one_digit(v):
+    if v > -10 and v < 10 and v.is_integer() :
+        return True
+    else:
+        return False
+
+# function for checking easy calculations
+def check(v1, v2, v3):
+    msg = ""
+
+    if is_one_digit(v1) and is_one_digit(v2):
+        msg = msg + msg_6
+    
+    if (v1 == 1 or v2 == 1) and v3 == "*":
+        msg = msg + msg_7
+    
+    if (v1 == 0 or v2 == 0) and (v3 == "*" or v3 == "+" or v3 == "-"):
+        msg = msg + msg_8
+    
+    if msg != "":
+        msg = msg_9 + msg
+        print(msg)
+
 
 # loop for continuos error checking
 while True:
@@ -31,6 +62,8 @@ while True:
     except:
         print(msg_1)
         continue  # repeat loop if error occured
+
+    check(x, y, operator)  # checking and printing honest messages
 
     if (operator not in ["+", "-", "*", "/"]):
         print(msg_2)
